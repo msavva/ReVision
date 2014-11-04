@@ -22,7 +22,7 @@ classdef PatchSet < handle
         % K-means using VL_feat routine
         function [C, Cfreq] = kmeansVL(X, k)
             X = X';
-            [C, A] = kmeans(X, k, 'algorithm', 'elkan', 'initialization', 'plusplus');
+            [C, A] = vl_kmeans(X, k, 'algorithm', 'elkan', 'initialization', 'plusplus');
             % Also sort centroids in descending order of popularity
             count = hist(single(A),single(unique(A)));
             [Cfreq, I] = sort(count,'descend');

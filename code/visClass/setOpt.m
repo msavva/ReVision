@@ -1,8 +1,14 @@
+%% Global Parameters
+% Set the below directory to the root of the image corpus with
+% subdirectories for each image category (see below)
+IMAGES_ROOT = '../../corpus/';
+
+% Download the VLFeat library binaries: http://www.vlfeat.org/download.html
+% then extract and set VLFEATROOT to point to extracted location
+VLFEAT_ROOT = '../vlfeat-0.9.19';
+
 %% Load VL_FEAT
-curDir = pwd;
-cd C:\code\VisInterp\code\vlfeat-0.9.9\toolbox\
-vl_setup('NOPREFIX');
-cd(curDir);
+run(strcat(VLFEAT_ROOT, '/toolbox/vl_setup'));
 
 %% Configuration
 opt.rfSize = 6;
@@ -21,7 +27,7 @@ opt.filterTextRegions = false;
 opt.subdivisionLevels = 1;
 opt.addIs3Dtag = false;
 
-opt.baseDir = 'C:\code\VisInterp\images\';
+opt.baseDir = IMAGES_ROOT;
 opt.catDirs = {'bar', 'bar3D','lines', 'lines3D', 'pie', 'pie3D', 'scatter','scatter3D', 'surface3D'};
 % opt.catDirs = {'bar','lines','pie', 'scatter'};
 % opt.catDirs = {'bar','pie'};

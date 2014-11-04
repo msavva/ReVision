@@ -71,9 +71,9 @@ end
 
     %% Output
     if (opt.useTextFeatures)
-        prefix = 'c:\UMDtxt_';
+        prefix = '../../feats_txt_';
     else 
-        prefix = 'c:\UMD_';
+        prefix = '../../feats_';
     end
     filename = strcat(prefix, setName, '.arff');
     data.featuresToARFF(filename, X, Y, setName, featureNames);
