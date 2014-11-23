@@ -1,0 +1,81 @@
+%% Given a chart, output bars 
+
+clear all
+setupPath();
+
+[chart_files fullpath outpath] = getImagesInPath('Testing/bars/nogrid_bars');
+
+outString = 'file,proj_decision,proj_time,cc_decision,cc_time\n';
+%for i=1:length(chart_files)
+for fileNum=1 
+
+    % Read in the image
+    curFile = chart_files{fileNum};
+    im = imread(fullfile(fullpath, curFile));
+    outString = strcat(outString, ',', curFile);
+    
+    % Only consider color images
+    if(size(im,3) > 1)
+        disp('Computing projections...');
+        tic
+        imgray = rgb2gray(im);
+        % Edge detection
+        imedges = edge(imgray, 'canny'); % outputs binary image
+        % Compute the projection profiles
+        profiles = findProjectionProfiles(imedges);
+
+        % Find local maxima that are greater than one stdev away from the average
+        % in the projection profiles
+        [xPeaks, xLocs] = findpeaks(profiles.x, 'MINPEAKHEIGHT', ...
+            sum(profiles.x)/length(profiles.x) + std(profiles.x));
+        [yPeaks, yLocs] = findpeaks(profiles.y, 'MINPEAKHEIGHT', ...
+            sum(profiles.y)/length(profiles.y) + std(profiles.y));
+
+        alignment = barchart_orientation_profiles(profiles);
+        proj_elapsed = toc;
+
+        % Find the x-axis
+        yLocOfXAxis = xLocs(xPeaks == max(xPeaks));
+
+        % Find the y-axis
+        xLocOfYAxis = yLocs(yPeaks == max(yPeaks));       
+        
+        % Vertical bars
+        if strcmp(alignment, v') == 1
+            % Consider pairs of vertical lines
+            i = 1;
+            minDistance = 5; % Threshold for parallel peaks
+            while i < length(yLocs-1)
+                lLoc = i; rLoc = i+1;
+                if((rLoc - lLoc) <= minDistance)
+                    yLocs = cat(2,yLocs(1:i-1),(yLocs(i)+yLocs(i+1))/2,yLocs(i+2:end));
+                    yPeaks = cat(2,yPeaks(1:i-1),(yPeaks(i)+yPeaks(i+1))/2,yPeaks(i+2:end));
+                else
+                    
+                    i = i+1;
+                end
+            end
+        end
+        
+        outString = strcat(outString,sprintf(',%s,%d',alignment,proj_elapsed));
+
+        disp('Creating profile image...');
+        handle = projectionprofile_image(im, profiles, xLocs, xPeaks, yLocs, yPeaks);
+        
+        disp('Saving profile image...');
+        saveImage(handle, curFile, '_profiles2.png', outpath);
+        close
+
+        % Find bar locations by considering the gaps
+    %     gaps = diff(yLocs);
+    %     avgGapSize = sum(gaps)/length(gaps);
+    %     bars = [];
+    %     for i=1:length(yLocs)-1
+    %         if (yLocs(i+1)-yLocs(i)) > avgGapSize
+    %             bars = [bars; yLocs(i) yLocs(i+1)];
+    %         end
+    %     end
+    end
+end
+
+outString

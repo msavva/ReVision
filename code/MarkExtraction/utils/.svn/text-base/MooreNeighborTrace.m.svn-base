@@ -1,0 +1,19 @@
+function curves = MooreNeighborTrace(edgeIm, dirIm, magIm)
+    maxDirDiff = pi/4;
+
+    paddedEdgeIm = padarray(edgeIm, [1 1]);
+    
+    dirIm_restricted = dirIm;
+    dirIm_restricted(edgeIm == 0) = 0;
+    dirIm_restricted = padarray(dirIm_restricted, [1 1]);
+    
+    magIm_restricted = magIm;
+    magIm_restricted(edgeIm == 0) = 0;
+    magIm_restricted = padarray(magIm_restricted, [1 1]);
+    
+    imSize = size(dirIm_restricted);
+    
+    curDirection = [];
+    
+    curves = {};
+end

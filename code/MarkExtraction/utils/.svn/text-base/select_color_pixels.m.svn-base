@@ -1,0 +1,43 @@
+%%
+% Given an input image and a color, return a binary image containing the
+% pixels that are nearby that color (determined by tolerance). The image is
+% assumed to be m x n x 3, the color 3 x 1. Pixels are kept if all of the
+% plane components are within tolerance of the same color plane.
+
+function outim = select_color_pixels(im, color, tolerance)
+
+    if ~exist('tolerance', 'var')
+        tolerance = 0.01;
+    end
+    
+    color_im = repmat(color(:), [1, size(im,1)*size(im,2)]);
+    
+    %imflat = flattencolors(im);
+    
+    if size(im,3) > 1
+        imflat = zeros(3, size(im,1)*size(im,2));
+        imflat(1,:) = reshape(im(:,:,1), [1 size(im,1)*size(im,2)]);
+        imflat(2,:) = reshape(im(:,:,2), [1 size(im,1)*size(im,2)]);
+        imflat(3,:) = reshape(im(:,:,3), [1 size(im,1)*size(im,2)]);
+    else
+        imflat = im(:)';
+    end
+    
+    size(color_im)
+    size(imflat)
+    
+    err = sqrt(sum((imflat - color_im).^2,1));
+
+    outim = reshape(err < tolerance, [size(im,1) size(im,2)]);
+
+    %     color_im = double(zeros(size(im,1), size(im,2),3));
+%     color_im(:,:,1) = repmat(color(1), [size(im,1) size(im,2)]);
+%     color_im(:,:,2) = repmat(color(2), [size(im,1) size(im,2)]);
+%     color_im(:,:,3) = repmat(color(3), [size(im,1) size(im,2)]);
+    
+    %outim = abs(im(:,:,1)-color_im(:,:,1)) <= tolerance & ...
+    %       abs(im(:,:,2)-color_im(:,:,2)) <= tolerance & ...
+    %        abs(im(:,:,3)-color_im(:,:,3)) <= tolerance;
+    clear color_im err imflat
+
+end

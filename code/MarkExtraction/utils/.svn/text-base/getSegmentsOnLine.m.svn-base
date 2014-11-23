@@ -1,0 +1,67 @@
+%%
+% Given a line, return the line segments along it longer than
+% min_length.
+%
+% line_params: struct with elements x0 and d, where x0 and x0+d are points
+% on the line.
+function segments = getSegmentsOnLine(edgelIm, line_params, minFitDistance, ...
+                                      minLength)
+
+    if ~exist('minFitDistance','var')
+        minFitDistance = 1;
+    end
+    
+    if ~exist('minLength', 'var')
+        minLength = 5;
+    end
+
+    nonzeroEdgels = find(edgelIm ~= 0);
+    [iInds jInds] = ind2sub(size(edgelIm), nonzeroEdgels);
+    XY = [jInds iInds];
+
+    % Calculate the distance of each point to the line
+    [err XYproj aMat] = Residuals_line(XY, line_params.x0, line_params.d, ...
+                                  false, false);
+    
+    inlier_inds = find(err <= minFitDistance);
+    
+    inlier_projs = XYproj(inlier_inds, :);
+    inlier_weights = aMat(inlier_inds);
+     
+    [sorted_weights sorted_inds] = sort(inlier_weights);
+    projweights = [inlier_projs(sorted_inds, :) sorted_weights];
+    sortedprojections = unique(projweights, 'rows');
+    sortedweights = sortedprojections(:,3);
+    
+    sp_shift = zeros(length(sortedweights)-1,1);
+    sp_shift(1:length(sortedweights)-1) = sortedweights(2:length(sortedweights));    
+    sp_diff = sp_shift - sortedweights(1:length(sortedweights)-1);
+    
+    MAX_PIXELS_BETWEEN = 3;
+    line_divisions = find(sp_diff > MAX_PIXELS_BETWEEN);
+
+    segments = {};
+    if ~isempty(line_divisions)
+        for i=1:length(line_divisions)+1
+            newline = struct();
+            if i == 1
+                newline.x0 = sortedprojections(1, 1:2);
+                newline.x1 = sortedprojections(line_divisions(i), 1:2);
+                newline.pts = sortedprojections(1:line_divisions(i), 1:2);
+            elseif i == length(line_divisions)+1
+                newline.x0 = sortedprojections(line_divisions(i-1)+1, 1:2);
+                newline.x1 = sortedprojections(size(sortedprojections,1), 1:2);
+                newline.pts = sortedprojections(line_divisions(i-1)+1:size(sortedprojections,1), 1:2);
+            else
+                newline.x0 = sortedprojections(line_divisions(i-1)+1,1:2);
+                newline.x1 = sortedprojections(line_divisions(i),1:2);
+                newline.pts = sortedprojections(line_divisions(i-1)+1:line_divisions(i), 1:2);
+            end
+            newline.d = newline.x1-newline.x0;
+
+            if(norm(newline.d,2) > minLength)
+                segments{end+1} = newline;
+            end
+        end
+    end   
+end

@@ -1,0 +1,16 @@
+function pointEllipseDistanceIm(points, projections, imsize)
+    figure; imshow(zeros(imsize)); hold on;
+    %drawEllipse(allEllipses{curveInds(bestEllipseInd)}, 'red');
+    samplePts = randperm(length(points));
+    samplePts = samplePts(1:100);
+    for i=1:length(samplePts)
+        ind = samplePts(i);
+        plot([points(ind,1); projections(ind,1)], ...
+             [points(ind,2); projections(ind,2)], ...
+             'Color', 'green', 'LineWidth',1);
+        plot(projections(ind,1),projections(ind,2),'--ro','LineWidth',2,'MarkerFaceColor','red','MarkerSize',1);
+        %plot(XY(i,2), XY(i,1));
+        %plot(XYproj(i,1),XYproj(i,2),'--ro','LineWidth',2,'MarkerFaceColor','green','MarkerSize',1);
+    end
+    hold off;
+end

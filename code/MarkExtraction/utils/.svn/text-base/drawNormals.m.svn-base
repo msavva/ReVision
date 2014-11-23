@@ -1,0 +1,38 @@
+%%
+% Overlay normals on an image storing normal direction at
+% each pixel.
+%
+% INPUT
+%
+% dirIm: image containing a value between [0, 2*pi] for each pixel
+%        that has a normal direction, NaN otherwise
+%
+% p: K-by-2 list containing indices of pixels with normals
+%
+% overlayIm (optional): image to overlay normals over. Defaults to dirIm.
+function drawNormals(dirIm, p, overlayIm)
+    if ~exist('overlayIm', 'var')
+        overlayIm = dirIm;
+    end
+
+    % Draw the direction image with overlaid normals
+    figure;
+    if islogical(overlayIm)
+        imshow(overlayIm)
+    else
+        imshow(overlayIm/max(max(overlayIm)));
+    end
+    hold on;
+    normalLength = 10;
+    samplePoints = ceil(rand(200,1)*size(p,1));
+    for k=1:length(samplePoints)
+        i = p(samplePoints(k),1);
+        j = p(samplePoints(k),2);
+        plot([j; j+normalLength*cos(dirIm(i,j))], ...
+             [i; i+normalLength*sin(dirIm(i,j))], ...
+             'Color', 'green', 'LineWidth', 1);
+        plot(j+normalLength*cos(dirIm(i,j)), i+normalLength*sin(dirIm(i,j)), ...
+             '--ro', 'LineWidth',2,'MarkerFaceColor','red','MarkerSize',2);
+    end
+    hold off;
+end

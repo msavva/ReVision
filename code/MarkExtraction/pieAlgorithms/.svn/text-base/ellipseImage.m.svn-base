@@ -1,0 +1,36 @@
+function im = ellipseImage(params, imsize, npoints, nhoodsize)
+
+   if ~exist('npoints', 'var')
+        npoints = 500;
+   end
+
+   if~exist('nhoodsize', 'var')
+       nhoodsize = 3;
+   end
+
+   phi = 0:2*pi/npoints:2*pi;
+   
+   % Orientation
+   orientation = params(5);
+   
+   xvals = params(1)+params(3)*cos(phi)*cos(orientation) - ...
+           params(4)*sin(phi)*sin(orientation);
+   yvals = params(2)+params(3)*cos(phi)*sin(orientation) + ...
+           params(4)*sin(phi)*cos(orientation);
+   
+   xvals = ceil(xvals);
+   yvals = ceil(yvals);
+   
+   im = zeros(imsize);
+   outOfBounds = find(xvals < 1 | xvals > imsize(2) | ...
+                      yvals < 1 | yvals > imsize(1));
+   xvals(outOfBounds) = nan;
+   yvals(outOfBounds) = nan;  
+   for i=1:length(xvals)
+       if(~isnan(xvals(i)))
+        im(yvals(i), xvals(i)) = 1;
+       end
+   end
+
+   im = imdilate(im, strel('square',nhoodsize));
+end

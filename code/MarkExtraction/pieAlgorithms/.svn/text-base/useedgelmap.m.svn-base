@@ -1,0 +1,16 @@
+%%
+% Function that takes the result of ellipse-walking for flat pies and
+% decides whether to use color extraction or an edge detector to retrieve
+% lines. Return 'true' if it decides an edge map should be used.
+%
+% V1 implementation: only use cluster sizes. Use the color map if the
+% largest cluster has larger than a standard deviation more elements than
+% the next largest cluster.
+%
+function res = useedgelmap(clustersizes)
+    res = false;
+
+    if length(find(clustersizes > max(clustersizes)-std(clustersizes))) > 1
+        res = true;
+    end
+end

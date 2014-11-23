@@ -1,0 +1,56 @@
+function [avgcolors clusters clustersizes] = clusterbordercolors(colortrace, thresh)
+
+    if ~exist('thresh','var')
+        if ~exist('LAB_COLOR_THRESH')
+            thresholds();
+        end
+        thresh = LAB_COLOR_THRESH;
+    end
+
+    clusters = {};
+    clustersizes = [];
+    avgcolors = [];
+    
+    colortrace_flat = flattencolors(colortrace);
+    
+    % Initialize the first cluster
+    firstcluster = stack();
+    firstcluster.push(colortrace_flat(:,1));
+    clusters{end+1} = firstcluster;
+    clustersizes(end+1) = 1;
+    avgcolors(:,end+1) = colortrace_flat(:,1);
+    
+    % Iterate through each subsequent color
+    for i=2:size(colortrace_flat, 2)
+        curcolor = colortrace_flat(:,i);
+        % Find color difference between this color and all the average
+        % colors.
+        matchedcluster = false;
+        for j=1:size(avgcolors,2)
+            curavgcolor = avgcolors(:,j);
+            diff = sqrt(sum((curavgcolor-curcolor).^2));
+            
+            % Integrate this color with a current clusters
+            if diff < thresh
+                
+                clusters{j}.push(curcolor);
+                clustersizes(j) = clustersizes(j)+1;
+                newavgcolor = curavgcolor*size(clusters{j},2)+curcolor;
+                newavgcolor = newavgcolor/(size(clusters{j},2)+1);
+                avgcolors(:,j) = newavgcolor;
+                
+                matchedcluster = true;
+                break;
+            end
+        end
+        
+        % Create a new cluster with this color
+        if ~matchedcluster
+            newcluster = stack();
+            newcluster.push(curcolor);
+            clusters{end+1} = newcluster;
+            clustersizes(end+1) = 1;
+            avgcolors(:,end+1) = curcolor;
+        end
+    end
+end

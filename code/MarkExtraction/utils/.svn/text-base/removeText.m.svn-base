@@ -1,0 +1,37 @@
+function noTextEdgels = removeText(bwIm, edgelIm)
+
+    DISPLAY_ON = false;
+
+    L = bwlabel(bwIm);
+    props = regionprops(L, 'all');
+
+    centroidIm = zeros(size(bwIm));
+
+    propCentroids = zeros(length(props), 2);
+
+    textAspectThreshold = 0.5;
+    areaThreshold = (size(bwIm,1)*size(bwIm,2))/100;
+
+    noTextEdgels = edgelIm;
+    
+    for i=1:length(props)
+        propCentroids(i, :) = props(i).Centroid;
+        centroidIm(min(size(centroidIm,2),ceil(props(i).Centroid(2))), min(size(centroidIm,1),ceil(props(i).Centroid(1)))) = 1;
+
+        aspect = min(props(i).BoundingBox(3),props(i).BoundingBox(4))/...
+                 max(props(i).BoundingBox(3),props(i).BoundingBox(4));
+        bbSize = props(i).BoundingBox(3)*props(i).BoundingBox(4);
+
+        if(bbSize <= areaThreshold && aspect >= textAspectThreshold)
+            noTextEdgels(props(i).SubarrayIdx{:}) = 0;
+        end
+    end
+
+    if DISPLAY_ON
+        figure; imshow(imGray); hold on;
+        scatter(propCentroids(:,1), propCentroids(:,2), 'MarkerEdgeColor', 'b', 'MarkerFaceColor','b','SizeData',20);
+        hold off;
+
+        figure; imshow(noTextIm);
+    end
+end

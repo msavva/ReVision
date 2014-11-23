@@ -1,0 +1,15 @@
+%% Choosing a good pie slice
+
+% Choose a candidate pie slice given a set of connected components
+
+% Method 1: Keep slices larger than a certain percentage of the image
+% area.
+function pieSlices = candidateSlices1(im, regions)
+    pieSlices = [];
+    pieSliceMin = (size(im,1)*size(im,2))/200;
+    for i=1:length(regions)
+        if(regions(i).Area > pieSliceMin)
+            pieSlices = [pieSlices regions(i)];
+        end
+    end
+end

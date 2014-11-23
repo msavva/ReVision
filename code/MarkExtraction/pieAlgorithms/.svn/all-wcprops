@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/ReVision-chartextraction/!svn/ver/26/pieAlgorithms
+END
+ellipseRANSAC.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ReVision-chartextraction/!svn/ver/23/pieAlgorithms/ellipseRANSAC.m
+END
+circleRANSAC.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ReVision-chartextraction/!svn/ver/26/pieAlgorithms/circleRANSAC.m
+END
+fitrectangles.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/fitrectangles.m
+END
+useedgelmap.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/useedgelmap.m
+END
+fitellipse.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/fitellipse.m
+END
+ellipseImage.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/ellipseImage.m
+END
+candidateSlices1.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/candidateSlices1.m
+END
+license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/license.txt
+END
+pointEllipseDistanceIm.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/pointEllipseDistanceIm.m
+END
+Residuals_ellipse.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/Residuals_ellipse.m
+END
+Residuals_ellipse_vector1.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/ReVision-chartextraction/!svn/ver/23/pieAlgorithms/Residuals_ellipse_vector1.m
+END
+fitpielines.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/fitpielines.m
+END
+drawEllipse.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/drawEllipse.m
+END
+Residuals_circle.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ReVision-chartextraction/!svn/ver/24/pieAlgorithms/Residuals_circle.m
+END
+fitEllipsesToCurves.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ReVision-chartextraction/!svn/ver/1/pieAlgorithms/fitEllipsesToCurves.m
+END
+drawCircle.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ReVision-chartextraction/!svn/ver/24/pieAlgorithms/drawCircle.m
+END
+Projections_circle.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ReVision-chartextraction/!svn/ver/24/pieAlgorithms/Projections_circle.m
+END
+circfit.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ReVision-chartextraction/!svn/ver/24/pieAlgorithms/circfit.m
+END

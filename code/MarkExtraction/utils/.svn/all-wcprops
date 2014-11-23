@@ -1,0 +1,197 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/ReVision-chartextraction/!svn/ver/26/utils
+END
+stegerLines.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ReVision-chartextraction/!svn/ver/1/utils/stegerLines.m
+END
+drawNormals.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ReVision-chartextraction/!svn/ver/1/utils/drawNormals.m
+END
+getSegmentsOnLine.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ReVision-chartextraction/!svn/ver/1/utils/getSegmentsOnLine.m
+END
+adjacentsegs.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ReVision-chartextraction/!svn/ver/2/utils/adjacentsegs.m
+END
+conncompgray.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ReVision-chartextraction/!svn/ver/1/utils/conncompgray.m
+END
+stack.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/ReVision-chartextraction/!svn/ver/1/utils/stack.m
+END
+saveVar.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ReVision-chartextraction/!svn/ver/1/utils/saveVar.m
+END
+getImagesInPath.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ReVision-chartextraction/!svn/ver/1/utils/getImagesInPath.m
+END
+vectorize.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ReVision-chartextraction/!svn/ver/1/utils/vectorize.m
+END
+conncompcolor.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ReVision-chartextraction/!svn/ver/2/utils/conncompcolor.m
+END
+avgColor.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ReVision-chartextraction/!svn/ver/1/utils/avgColor.m
+END
+laplacian.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ReVision-chartextraction/!svn/ver/1/utils/laplacian.m
+END
+binarizeLABImage.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ReVision-chartextraction/!svn/ver/1/utils/binarizeLABImage.m
+END
+ellipse_circumference.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ReVision-chartextraction/!svn/ver/1/utils/ellipse_circumference.m
+END
+getEllipsePoints.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ReVision-chartextraction/!svn/ver/27/utils/getEllipsePoints.m
+END
+cannyEdgels.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ReVision-chartextraction/!svn/ver/26/utils/cannyEdgels.m
+END
+clusterbordercolors.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ReVision-chartextraction/!svn/ver/1/utils/clusterbordercolors.m
+END
+saveImage.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ReVision-chartextraction/!svn/ver/1/utils/saveImage.m
+END
+select_color_pixels.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ReVision-chartextraction/!svn/ver/1/utils/select_color_pixels.m
+END
+Residuals_line.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ReVision-chartextraction/!svn/ver/2/utils/Residuals_line.m
+END
+removeText.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/ReVision-chartextraction/!svn/ver/1/utils/removeText.m
+END
+drawLine.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ReVision-chartextraction/!svn/ver/2/utils/drawLine.m
+END
+gauss1d.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/ReVision-chartextraction/!svn/ver/1/utils/gauss1d.m
+END
+getCurves.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/ReVision-chartextraction/!svn/ver/1/utils/getCurves.m
+END
+getLines.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ReVision-chartextraction/!svn/ver/1/utils/getLines.m
+END
+ellipsetrace.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ReVision-chartextraction/!svn/ver/22/utils/ellipsetrace.m
+END
+MooreNeighborTrace.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ReVision-chartextraction/!svn/ver/1/utils/MooreNeighborTrace.m
+END
+getAdaptiveEdgeMap.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ReVision-chartextraction/!svn/ver/26/utils/getAdaptiveEdgeMap.m
+END
+distToPoint.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ReVision-chartextraction/!svn/ver/1/utils/distToPoint.m
+END
+imshowlarge.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/ReVision-chartextraction/!svn/ver/2/utils/imshowlarge.m
+END
+pointsInEllipse.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/ReVision-chartextraction/!svn/ver/1/utils/pointsInEllipse.m
+END
+getimage.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ReVision-chartextraction/!svn/ver/1/utils/getimage.m
+END

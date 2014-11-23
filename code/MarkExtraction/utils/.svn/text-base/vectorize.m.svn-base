@@ -1,0 +1,9 @@
+function [lines, arcs] = vectorize(image)
+    if(size(image, 3) == 3)
+        image = rgb2gray(image);
+    end
+    edges = edge(image, 'canny');
+    
+    lines = [];
+    arcs = [];
+end

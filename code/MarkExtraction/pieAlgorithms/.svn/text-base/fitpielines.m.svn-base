@@ -1,0 +1,30 @@
+function lines = fitpielines(linepoint_im, ellipse_params, goodline_err)
+
+    if ~exist('goodline_err', 'var')
+        if ~exist('GOOD_LINE_THRESH')
+            thresholds();
+            goodline_err = GOOD_LINE_THRESH;
+        end
+    end
+
+    lines = {};
+    while true
+        fprintf(2, 'RANSAC-ing...\n');
+        [line_params, line_inliers, line_error] = line_semi_infinite_RANSAC(linepoint_im, [ellipse_params(1) ellipse_params(2)]);
+
+        if isempty(fieldnames(line_params))
+            return;
+        end
+
+        if line_error > goodline_err
+            return;
+        end
+
+        fprintf(2, 'adding to alllines...\n');
+        line_inliers = floor(line_inliers);
+        lines{end+1} = line_params;
+
+        linepoint_im(sub2ind(size(linepoint_im), line_inliers(:,2), line_inliers(:,1))) = 0;          
+    end
+
+end

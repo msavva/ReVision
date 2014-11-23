@@ -1,0 +1,46 @@
+%%
+% Binarize a three plane image. Assume the image is in CIELAB space.
+% Estimate the background color by pulling the most common L, A, and B
+% values from each plane. Return an image where those pixels are off.
+function bw = binarizeLABImage(im_lab)
+
+    thresholds();
+
+    % Compute the min and max ranges of the LAB colorspace.
+    boundim = zeros(1,5,3);
+    boundim(:,1,:) = [0 0 0];
+    boundim(:,2,:) = [1 0 0];
+    boundim(:,3,:) = [0 1 0];
+    boundim(:,4,:) = [0 0 1];
+    boundim(:,5,:) = [1 1 1];
+    boundim = colorspace('rgb->lab',boundim);
+    l_bounds = [min(boundim(:,:,1)) max(boundim(:,:,1))];
+    a_bounds = [min(boundim(:,:,2)) max(boundim(:,:,2))];
+    b_bounds = [min(boundim(:,:,3)) max(boundim(:,:,3))];
+    lbins = l_bounds(1):l_bounds(2)/100:l_bounds(2);
+    abins = a_bounds(1):a_bounds(2)/100:a_bounds(2);
+    bbins = b_bounds(1):b_bounds(2)/100:b_bounds(2);
+
+    % Build a histogram for each plane
+    im_lab_l = im_lab(:,:,1);
+    im_lab_a = im_lab(:,:,2);
+    im_lab_b = im_lab(:,:,3);
+    l_hist = histc(im_lab_l(:), lbins);
+    a_hist = histc(im_lab_a(:), abins);
+    b_hist = histc(im_lab_b(:), bbins);
+
+    % Find the most common color and assume it's the background color
+    lmax = find(l_hist == max(l_hist));
+    amax = find(a_hist == max(a_hist));
+    bmax = find(b_hist == max(b_hist));
+    
+    % Compute the error image with respect to the background color
+    flatim = flattencolors(im_lab);
+    flatmaxcol = [lbins(lmax(1)); abins(amax(1)); bbins(bmax(1))];
+    flatmaxcol = repmat(flatmaxcol, [1 size(flatim, 2)]);
+    
+    % Keep pixels that are distant enough from the background color
+    bw = sqrt(sum((flatim-flatmaxcol).^2,1));
+    bw = reshape(bw > LAB_COLOR_THRESH, [size(im_lab,1) size(im_lab,2)]);
+
+end

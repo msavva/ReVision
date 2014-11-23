@@ -1,0 +1,27 @@
+function [xx, xy, yy] = laplacian(im, sigma)
+    
+    % Check that sigma exists; if not, assign sigma = 1.0
+    if ~exist('sigma', 'var')  %% sigma is the std dev for the Gaussian filters
+      sigma = 1.0;
+    elseif (sigma < 0.5/3)
+      fprintf(2, 'User specified sigma = %e is too small.\n', sigma); 
+      sigma = 0.5000001/3;
+      fprintf(2, 'Using sigma = %f instead\n', sigma);
+    end
+    
+    % Taken from cannyEdgels.m
+    
+    %%%%%%%%%%%%%%% Build Filter Kernels %%%%%%%%%%%%%%%%%%%%%%%
+
+    %%% Build Gaussian filter masks, along with derivatives.
+    %%% The second derivative is not used yet.
+    sigmaSqr = sigma*sigma;
+    gFiltSize = 2 * round(3.0 * sigma) + 1;
+    x = [1:gFiltSize] - round((gFiltSize+1)/2);
+    gFilt = 1/sqrt(2*pi*sigmaSqr) * exp(- x .* x / (2.0*sigmaSqr));
+    gFilt = gFilt/ sum(gFilt(:));
+    gxFilt = - (x / sigmaSqr) .* gFilt;
+    gxxFilt = ((x / sigmaSqr).^2 - 1.0/sigmaSqr) .* gFilt;
+    
+    
+end

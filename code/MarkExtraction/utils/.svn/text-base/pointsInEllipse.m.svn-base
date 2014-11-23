@@ -1,0 +1,51 @@
+%%
+% Given a set of points and ellipse parameters, return the points inside the
+% ellipse. Does not return points within a certain distance of the ellipse.
+
+function pts = pointsInEllipse(XY, params)
+    DISPLAY_ON = false;
+
+    [rss, XYproj] = Residuals_ellipse(XY, params);
+     
+    centerVec = XY-repmat([params(1) params(2)], [length(XY), 1]);
+    projVec = XY - XYproj;
+    dotVec = sign(sum((centerVec.*projVec),2));
+    
+    % Only return points that are placed more than 5 pixels inside the
+    % ellipse
+    pts = XY(dotVec < 0 & sqrt(sum(projVec.^2,2)) > 5, :);
+    
+    % Sample points and display vectors pointing to the projection and the
+    % center
+    if DISPLAY_ON
+    
+        XYim = zeros(max(XY(:,2)), max(XY(:,1)));
+        XYim(sub2ind(size(XYim), XY(:,2), XY(:,1))) = 1;
+
+        ptIm = zeros(size(XYim));
+        ptIm(sub2ind(size(XYim), pts(:,2), pts(:,1))) = 1;
+
+        figure; imshow(XYim);
+        hold on;
+        %drawEllipse(allEllipses{curveInds(bestEllipseInd)}, 'red');
+        samplePts = randperm(length(XYproj));
+        samplePts = samplePts(1:20);
+        for i=1:length(samplePts)
+            ind = samplePts(i);
+            plot([XY(ind,1); XYproj(ind,1)], ...
+                 [XY(ind,2); XYproj(ind,2)], ...
+                 'Color', 'green', 'LineWidth',1);
+            plot(XYproj(ind,1),XYproj(ind,2),'--ro','LineWidth',2,'MarkerFaceColor','red','MarkerSize',1);
+
+            plot([XY(ind,1); params(1)], ...
+                 [XY(ind,2); params(2)], ...
+                 'Color', 'blue', 'LineWidth',1);
+            plot(params(1),params(2),'--bo','LineWidth',2,'MarkerFaceColor','blue','MarkerSize',1);        
+
+            %plot(XY(i,2), XY(i,1));
+            %plot(XYproj(i,1),XYproj(i,2),'--ro','LineWidth',2,'MarkerFaceColor','green','MarkerSize',1);
+        end
+        hold off;
+    
+    end
+end

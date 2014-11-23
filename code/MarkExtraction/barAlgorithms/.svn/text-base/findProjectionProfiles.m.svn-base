@@ -1,0 +1,12 @@
+% Computes and returns X and Y projection profiles for an image..
+%
+% Required parameters:
+%
+% I: input binary image
+%
+% Returns:
+%
+% profile: struct array with 'x' as the X profile and 'y' as the Y profile
+function profile = findProjectionProfiles(I)
+    profile = struct('x', sum(I'), 'y', sum(I));
+end
