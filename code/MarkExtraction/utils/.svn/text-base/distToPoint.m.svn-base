@@ -1,3 +1,0 @@
-function dist = distToPoint(XY, pt)
-    dist = sqrt(sum(XY-repmat(pt, [length(XY) 1]).^2, 2));
-end

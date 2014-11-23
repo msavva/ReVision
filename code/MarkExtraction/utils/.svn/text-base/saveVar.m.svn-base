@@ -1,5 +1,0 @@
-function saveVar(var, filename, suffix, outpath)
-    extInd = strfind(filename, '.');
-    outFile = strcat(filename(1:extInd-1),suffix);
-    save(fullfile(outpath,outFile), var);
-end
